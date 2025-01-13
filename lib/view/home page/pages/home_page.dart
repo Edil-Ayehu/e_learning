@@ -151,7 +151,7 @@ class HomePage extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -166,24 +166,26 @@ class HomePage extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    course.instructor,
-                    style: AppTextStyles.body2.copyWith(
-                      color: Get.isDarkMode
-                          ? AppColors.textDarkSecondaryColor
-                          : AppColors.textSecondaryColor,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const Spacer(),
-                  Text(
-                    course.duration,
-                    style: AppTextStyles.caption.copyWith(
-                      color: Get.isDarkMode
-                          ? AppColors.textDarkSecondaryColor
-                          : AppColors.textSecondaryColor,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        course.instructor,
+                        style: AppTextStyles.body2.copyWith(
+                          color: Get.isDarkMode
+                              ? AppColors.textDarkSecondaryColor
+                              : AppColors.textSecondaryColor,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        course.duration,
+                        style: AppTextStyles.caption.copyWith(
+                          color: Get.isDarkMode
+                              ? AppColors.textDarkSecondaryColor
+                              : AppColors.textSecondaryColor,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
