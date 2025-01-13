@@ -62,8 +62,22 @@ class HomePage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Welcome back,', style: AppTextStyles.h3),
-        Text('Continue Learning!', style: AppTextStyles.h1),
+        Text(
+          'Welcome back,',
+          style: AppTextStyles.h3.copyWith(
+            color: Get.isDarkMode
+                ? AppColors.textDarkPrimaryColor
+                : AppColors.textPrimaryColor,
+          ),
+        ),
+        Text(
+          'Continue Learning!',
+          style: AppTextStyles.h1.copyWith(
+            color: Get.isDarkMode
+                ? AppColors.textDarkPrimaryColor
+                : AppColors.textPrimaryColor,
+          ),
+        ),
       ],
     );
   }
@@ -72,7 +86,14 @@ class HomePage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Featured Courses', style: AppTextStyles.h3),
+        Text(
+          'Featured Courses',
+          style: AppTextStyles.h3.copyWith(
+            color: Get.isDarkMode
+                ? AppColors.textDarkPrimaryColor
+                : AppColors.textPrimaryColor,
+          ),
+        ),
         const SizedBox(height: 16),
         SizedBox(
           height: 240,
@@ -100,7 +121,9 @@ class HomePage extends StatelessWidget {
             : AppColors.surfaceColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Get.isDarkMode
+                ? Colors.black.withOpacity(0.2)
+                : Colors.black.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -134,19 +157,34 @@ class HomePage extends StatelessWidget {
                 children: [
                   Text(
                     course.title,
-                    style: AppTextStyles.subtitle1,
+                    style: AppTextStyles.subtitle1.copyWith(
+                      color: Get.isDarkMode
+                          ? AppColors.textDarkPrimaryColor
+                          : AppColors.textPrimaryColor,
+                    ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
                   Text(
                     course.instructor,
-                    style: AppTextStyles.body2,
+                    style: AppTextStyles.body2.copyWith(
+                      color: Get.isDarkMode
+                          ? AppColors.textDarkSecondaryColor
+                          : AppColors.textSecondaryColor,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const Spacer(),
-                  Text(course.duration, style: AppTextStyles.caption),
+                  Text(
+                    course.duration,
+                    style: AppTextStyles.caption.copyWith(
+                      color: Get.isDarkMode
+                          ? AppColors.textDarkSecondaryColor
+                          : AppColors.textSecondaryColor,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -166,7 +204,14 @@ class HomePage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Categories', style: AppTextStyles.h3),
+        Text(
+          'Categories',
+          style: AppTextStyles.h3.copyWith(
+            color: Get.isDarkMode
+                ? AppColors.textDarkPrimaryColor
+                : AppColors.textPrimaryColor,
+          ),
+        ),
         const SizedBox(height: 16),
         GridView.builder(
           shrinkWrap: true,
@@ -196,7 +241,9 @@ class HomePage extends StatelessWidget {
             : AppColors.surfaceColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Get.isDarkMode
+                ? Colors.black.withOpacity(0.2)
+                : Colors.black.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -207,18 +254,29 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(category.icon, style: const TextStyle(fontSize: 24)),
+            Text(
+              category.icon,
+              style: const TextStyle(fontSize: 24),
+            ),
             const SizedBox(height: 8),
             Text(
               category.name,
-              style: AppTextStyles.subtitle2,
+              style: AppTextStyles.subtitle2.copyWith(
+                color: Get.isDarkMode
+                    ? AppColors.textDarkPrimaryColor
+                    : AppColors.textPrimaryColor,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
             ),
             Text(
               '${category.courseCount} Courses',
-              style: AppTextStyles.caption,
+              style: AppTextStyles.caption.copyWith(
+                color: Get.isDarkMode
+                    ? AppColors.textDarkSecondaryColor
+                    : AppColors.textSecondaryColor,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -232,7 +290,14 @@ class HomePage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Ongoing Courses', style: AppTextStyles.h3),
+        Text(
+          'Ongoing Courses',
+          style: AppTextStyles.h3.copyWith(
+            color: Get.isDarkMode
+                ? AppColors.textDarkPrimaryColor
+                : AppColors.textPrimaryColor,
+          ),
+        ),
         const SizedBox(height: 16),
         ListView.builder(
           shrinkWrap: true,
@@ -257,7 +322,9 @@ class HomePage extends StatelessWidget {
             : AppColors.surfaceColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Get.isDarkMode
+                ? Colors.black.withOpacity(0.2)
+                : Colors.black.withOpacity(0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -281,9 +348,23 @@ class HomePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(course.title, style: AppTextStyles.subtitle1),
+                  Text(
+                    course.title,
+                    style: AppTextStyles.subtitle1.copyWith(
+                      color: Get.isDarkMode
+                          ? AppColors.textDarkPrimaryColor
+                          : AppColors.textPrimaryColor,
+                    ),
+                  ),
                   const SizedBox(height: 4),
-                  Text(course.instructor, style: AppTextStyles.body2),
+                  Text(
+                    course.instructor,
+                    style: AppTextStyles.body2.copyWith(
+                      color: Get.isDarkMode
+                          ? AppColors.textDarkSecondaryColor
+                          : AppColors.textSecondaryColor,
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   LinearProgressIndicator(
                     value: course.progress,
@@ -293,8 +374,14 @@ class HomePage extends StatelessWidget {
                         AppColors.primaryColor),
                   ),
                   const SizedBox(height: 4),
-                  Text('${(course.progress * 100).toInt()}% Complete',
-                      style: AppTextStyles.caption),
+                  Text(
+                    '${(course.progress * 100).toInt()}% Complete',
+                    style: AppTextStyles.caption.copyWith(
+                      color: Get.isDarkMode
+                          ? AppColors.textDarkSecondaryColor
+                          : AppColors.textSecondaryColor,
+                    ),
+                  ),
                 ],
               ),
             ),
