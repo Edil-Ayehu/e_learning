@@ -91,11 +91,13 @@ class HomePage extends StatelessWidget {
 
   Widget _buildFeaturedCourseCard(Course course) {
     return Container(
-      width: 280,
+      width: Get.width < 600 ? Get.width * 0.75 : 280,
       margin: const EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Get.isDarkMode ? AppColors.surfaceDarkColor : AppColors.surfaceColor,
+        color: Get.isDarkMode
+            ? AppColors.surfaceDarkColor
+            : AppColors.surfaceColor,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -114,19 +116,39 @@ class HomePage extends StatelessWidget {
               height: 140,
               width: double.infinity,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  height: 140,
+                  color: AppColors.primaryLightColor.withOpacity(0.1),
+                  child: Icon(Icons.image_not_supported,
+                      color: AppColors.primaryColor.withOpacity(0.5)),
+                );
+              },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(course.title, style: AppTextStyles.subtitle1),
-                const SizedBox(height: 8),
-                Text(course.instructor, style: AppTextStyles.body2),
-                const SizedBox(height: 8),
-                Text(course.duration, style: AppTextStyles.caption),
-              ],
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    course.title,
+                    style: AppTextStyles.subtitle1,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    course.instructor,
+                    style: AppTextStyles.body2,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const Spacer(),
+                  Text(course.duration, style: AppTextStyles.caption),
+                ],
+              ),
             ),
           ),
         ],
@@ -135,6 +157,12 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildCategories() {
+    final crossAxisCount = Get.width < 600
+        ? 2
+        : Get.width < 1200
+            ? 3
+            : 4;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -143,9 +171,9 @@ class HomePage extends StatelessWidget {
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 2,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            childAspectRatio: Get.width < 600 ? 1.5 : 2,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
           ),
@@ -163,7 +191,9 @@ class HomePage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Get.isDarkMode ? AppColors.surfaceDarkColor : AppColors.surfaceColor,
+        color: Get.isDarkMode
+            ? AppColors.surfaceDarkColor
+            : AppColors.surfaceColor,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -179,8 +209,19 @@ class HomePage extends StatelessWidget {
           children: [
             Text(category.icon, style: const TextStyle(fontSize: 24)),
             const SizedBox(height: 8),
-            Text(category.name, style: AppTextStyles.subtitle2),
-            Text('${category.courseCount} Courses', style: AppTextStyles.caption),
+            Text(
+              category.name,
+              style: AppTextStyles.subtitle2,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              '${category.courseCount} Courses',
+              style: AppTextStyles.caption,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ],
         ),
       ),
@@ -211,7 +252,9 @@ class HomePage extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Get.isDarkMode ? AppColors.surfaceDarkColor : AppColors.surfaceColor,
+        color: Get.isDarkMode
+            ? AppColors.surfaceDarkColor
+            : AppColors.surfaceColor,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -244,8 +287,10 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 8),
                   LinearProgressIndicator(
                     value: course.progress,
-                    backgroundColor: AppColors.primaryLightColor.withOpacity(0.2),
-                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
+                    backgroundColor:
+                        AppColors.primaryLightColor.withOpacity(0.2),
+                    valueColor: const AlwaysStoppedAnimation<Color>(
+                        AppColors.primaryColor),
                   ),
                   const SizedBox(height: 4),
                   Text('${(course.progress * 100).toInt()}% Complete',
