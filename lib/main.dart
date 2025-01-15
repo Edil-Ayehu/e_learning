@@ -7,22 +7,23 @@ import 'package:get_storage/get_storage.dart';
 
 void main() async {
   await GetStorage.init();
-  runApp(MyApp());
+  final themeController = Get.put(ThemeController());
+  runApp(MyApp(themeController: themeController));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  final themeController = Get.put(ThemeController());
+  final ThemeController themeController;
+  
+  const MyApp({super.key, required this.themeController});
 
   @override
   Widget build(BuildContext context) {
+    themeController.loadTheme();
     return GetMaterialApp(
       title: 'E-Learning App',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: themeController.theme,
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
