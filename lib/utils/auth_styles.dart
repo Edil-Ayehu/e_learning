@@ -14,6 +14,8 @@ class AuthStyles {
         borderRadius: BorderRadius.circular(12),
         borderSide: const BorderSide(color: AppColors.primaryColor, width: 1),
       ),
+      labelStyle: TextStyle(color: AppColors.textSecondaryColor),
+      floatingLabelStyle: TextStyle(color: AppColors.primaryColor),
     );
   }
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:e_learning/utils/auth_styles.dart';
 import 'package:e_learning/utils/app_colors.dart';
 
 class LoginPage extends StatelessWidget {
@@ -63,12 +62,14 @@ class LoginPage extends StatelessWidget {
                     child: Column(
                       children: [
                         _buildTextField(
+                          context,
                           'Email',
                           Icons.email_outlined,
                           keyboardType: TextInputType.emailAddress,
                         ),
                         const SizedBox(height: 16),
                         _buildTextField(
+                          context,
                           'Password',
                           Icons.lock_outline,
                           isPassword: true,
@@ -122,11 +123,11 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(String label, IconData icon,
+  Widget _buildTextField(BuildContext context, String label, IconData icon,
       {bool isPassword = false, TextInputType? keyboardType}) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -145,9 +146,11 @@ class LoginPage extends StatelessWidget {
             borderSide: BorderSide.none,
           ),
           filled: true,
-          fillColor: Colors.white,
+          fillColor: Theme.of(context).cardColor,
+          labelStyle: TextStyle(color: AppColors.textSecondaryColor),
           floatingLabelStyle: TextStyle(color: AppColors.primaryColor),
         ),
+        style: TextStyle(color: Theme.of(context).textTheme.bodyLarge?.color),
         obscureText: isPassword,
         keyboardType: keyboardType,
       ),
@@ -181,10 +184,12 @@ class LoginPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           elevation: 0,
+          foregroundColor: Colors.white,
         ),
         child: const Text(
           'Login',
           style: TextStyle(
+            color: Colors.white,
             fontSize: 16,
             fontWeight: FontWeight.bold,
             letterSpacing: 0.5,
