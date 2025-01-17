@@ -1,5 +1,6 @@
 import 'package:e_learning/controllers/theme_controller.dart';
 import 'package:e_learning/model/course.dart';
+import 'package:e_learning/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -207,7 +208,7 @@ class HomePage extends StatelessWidget {
   Widget _buildFeaturedCourseCard(BuildContext context, Course course) {
     return Card(
       child: InkWell(
-        onTap: () {},
+        onTap: () => Get.toNamed(AppRoutes.courseDetails, arguments: {'course': course}),
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Row(

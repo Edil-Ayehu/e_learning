@@ -5,6 +5,7 @@ import 'package:e_learning/model/course.dart';
 
 class CourseDetailsPage extends StatelessWidget {
   final Course course;
+  
 
   const CourseDetailsPage({super.key, required this.course});
 
@@ -68,6 +69,27 @@ class CourseDetailsPage extends StatelessWidget {
             Icon(Icons.timer_outlined, color: AppColors.textSecondaryColor),
             const SizedBox(width: 8),
             Text(course.duration),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              icon: Icon(Icons.forum_outlined),
+              onPressed: () => Get.toNamed('/course-discussion'),
+            ),
+            IconButton(
+              icon: Icon(Icons.quiz_outlined),
+              onPressed: () => Get.toNamed('/course-quiz'),
+            ),
+            IconButton(
+              icon: Icon(Icons.bar_chart),
+              onPressed: () => Get.toNamed('/course-progress'),
+            ),
+            IconButton(
+              icon: Icon(Icons.workspace_premium_outlined),
+              onPressed: () => Get.toNamed('/course-certificate'),
+            ),
           ],
         ),
       ],
@@ -137,7 +159,9 @@ class CourseDetailsPage extends StatelessWidget {
         title: Text('Lesson ${index + 1}'),
         subtitle: Text('Duration: 15 mins'),
         trailing: Icon(Icons.lock_outline, color: AppColors.textSecondaryColor),
-        onTap: () => Get.toNamed('/course-player'),
+        onTap: () {
+          Get.toNamed('/course-player', arguments: {'lessonIndex': index});
+        },
       ),
     );
   }
