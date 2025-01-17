@@ -2,10 +2,10 @@ import 'package:e_learning/common/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:e_learning/utils/app_colors.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  
 
   LoginPage({super.key});
 
@@ -28,15 +28,19 @@ class LoginPage extends StatelessWidget {
                   // Logo and App Name
                   Center(
                     child: Container(
-                      padding: const EdgeInsets.all(16),
+                      width: 120,
+                      height: 120,
                       decoration: BoxDecoration(
                         color: AppColors.primaryColor.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
-                        Icons.school_rounded,
-                        size: 64,
-                        color: AppColors.primaryColor,
+                      child: Lottie.asset(
+                        'assets/animations/anim1.json',
+                        fit: BoxFit.cover,
+                        width: 120,
+                        height: 120,
+                        animate: true,
+                        repeat: true,
                       ),
                     ),
                   ),
@@ -194,7 +198,8 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialButton(BuildContext context, String imagePath, String platform) {
+  Widget _buildSocialButton(
+      BuildContext context, String imagePath, String platform) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
