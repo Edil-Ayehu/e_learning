@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     themeController.loadTheme();
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'E-Learning App',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
