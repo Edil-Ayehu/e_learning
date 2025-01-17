@@ -5,6 +5,7 @@ import 'package:e_learning/utils/app_colors.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  
 
   LoginPage({super.key});
 
@@ -91,7 +92,7 @@ class LoginPage extends StatelessWidget {
                         const SizedBox(height: 24),
                         _buildDivider(),
                         const SizedBox(height: 24),
-                        _buildSocialLoginButtons(),
+                        _buildSocialLoginButtons(context),
                         const SizedBox(height: 24),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -182,22 +183,22 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialLoginButtons() {
+  Widget _buildSocialLoginButtons(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildSocialButton(Icons.g_mobiledata, 'Google'),
+        _buildSocialButton(context, 'assets/images/facebook.png', 'Google'),
         const SizedBox(width: 16),
-        _buildSocialButton(Icons.facebook, 'Facebook'),
+        _buildSocialButton(context, 'assets/images/google.png', 'Facebook'),
       ],
     );
   }
 
-  Widget _buildSocialButton(IconData icon, String platform) {
+  Widget _buildSocialButton(BuildContext context, String imagePath, String platform) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -207,10 +208,10 @@ class LoginPage extends StatelessWidget {
           ),
         ],
       ),
-      child: Icon(
-        icon,
-        color: AppColors.primaryColor,
-        size: 32,
+      child: Image.asset(
+        imagePath,
+        width: 32,
+        height: 32,
       ),
     );
   }
