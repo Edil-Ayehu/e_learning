@@ -160,6 +160,7 @@ class LoginPage extends StatelessWidget {
   Widget _buildLoginButton() {
     return Container(
       height: 55,
+      width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: AppColors.primaryColor,
