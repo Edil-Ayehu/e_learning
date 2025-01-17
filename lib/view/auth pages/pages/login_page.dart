@@ -1,3 +1,4 @@
+import 'package:e_learning/common/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:e_learning/utils/app_colors.dart';
@@ -158,45 +159,13 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _buildLoginButton() {
-    return Container(
-      height: 55,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: AppColors.primaryColor,
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primaryColor.withOpacity(0.25),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      child: ElevatedButton(
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            Get.offAllNamed('/home');
-          }
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          elevation: 0,
-          foregroundColor: Colors.white,
-        ),
-        child: const Text(
-          'Login',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 0.5,
-          ),
-        ),
-      ),
+    return CustomButton(
+      text: 'Login',
+      onPressed: () {
+        if (_formKey.currentState!.validate()) {
+          Get.offAllNamed('/home');
+        }
+      },
     );
   }
 
