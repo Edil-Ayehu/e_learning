@@ -1,4 +1,5 @@
 import 'package:e_learning/controllers/theme_controller.dart';
+import 'package:e_learning/model/analytics_data.dart';
 import 'package:e_learning/model/course.dart';
 import 'package:e_learning/utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +12,17 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('E-Learning', style: Theme.of(context).textTheme.headlineMedium),
+        title: Text('E-Learning',
+            style: Theme.of(context).textTheme.headlineMedium),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.analytics),
+            onPressed: () => _navigateToAnalytics(),
+          ),
           GetBuilder<ThemeController>(
             builder: (controller) => IconButton(
-              icon: Icon(controller.isDarkMode ? Icons.light_mode : Icons.dark_mode),
+              icon: Icon(
+                  controller.isDarkMode ? Icons.light_mode : Icons.dark_mode),
               onPressed: controller.changeTheme,
             ),
           ),
@@ -208,7 +215,8 @@ class HomePage extends StatelessWidget {
   Widget _buildFeaturedCourseCard(BuildContext context, Course course) {
     return Card(
       child: InkWell(
-        onTap: () => Get.toNamed(AppRoutes.courseDetails, arguments: {'course': course}),
+        onTap: () =>
+            Get.toNamed(AppRoutes.courseDetails, arguments: {'course': course}),
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Row(
@@ -250,6 +258,52 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _navigateToAnalytics() {
+    // Create sample analytics data (replace with real data from your backend)
+    final analyticsData = AnalyticsData(
+      overallProgress: 0.65,
+      totalTimeSpent: 480, // 8 hours
+      timePerCourse: {
+        'Flutter Development': 180,
+        'Dart Basics': 120,
+        'UI Design': 180,
+      },
+      achievements: [
+        Achievement(
+          title: 'Fast Learner',
+          description: 'Completed 5 lessons in one day',
+          icon: '🚀',
+          dateEarned: DateTime.now(),
+        ),
+        Achievement(
+          title: 'Streak Master',
+          description: 'Maintained a 7-day learning streak',
+          icon: '🔥',
+          dateEarned: DateTime.now(),
+        ),
+      ],
+      skillProgress: {
+        'Flutter': 0.8,
+        'Dart': 0.7,
+        'UI/UX': 0.6,
+      },
+      learningStreak: 7,
+      dailyStudyData: List.generate(
+        7,
+        (index) => DailyStudyData(
+          date: DateTime.now().subtract(Duration(days: 6 - index)),
+          timeSpent: 60 + (index * 10),
+          lessonsCompleted: 2 + index,
+        ),
+      ),
+    );
+
+    Get.toNamed(
+      AppRoutes.analytics,
+      arguments: {'analyticsData': analyticsData},
     );
   }
 }

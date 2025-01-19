@@ -11,4 +11,5 @@ abstract class AppRoutes {
   static const courseQuiz = '/course-quiz';
   static const courseProgress = '/course-progress';
   static const courseCertificate = '/course-certificate';
+  static const analytics = '/analytics';
 }
