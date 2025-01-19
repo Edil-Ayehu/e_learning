@@ -23,7 +23,7 @@ class CourseDiscussionPage extends StatelessWidget {
               },
             ),
           ),
-          _buildCommentInput(),
+          _buildCommentInput(context),
         ],
       ),
     );
@@ -81,11 +81,11 @@ class CourseDiscussionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildCommentInput() {
+  Widget _buildCommentInput(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -98,11 +98,32 @@ class CourseDiscussionPage extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
+              style: Theme.of(context).textTheme.bodyMedium,
               decoration: InputDecoration(
                 hintText: 'Write a comment...',
+                hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).textTheme.bodySmall?.color,
+                    ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(24),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).dividerColor,
+                  ),
                 ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).dividerColor,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  borderSide: BorderSide(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                filled: true,
+                fillColor: Theme.of(context).cardColor,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 8,
@@ -111,7 +132,10 @@ class CourseDiscussionPage extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.send, color: AppColors.primaryColor),
+            icon: Icon(
+              Icons.send,
+              color: Theme.of(context).colorScheme.primary,
+            ),
             onPressed: () {},
           ),
         ],
