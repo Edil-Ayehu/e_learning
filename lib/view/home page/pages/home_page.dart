@@ -151,41 +151,47 @@ class HomePage extends StatelessWidget {
   Widget _buildCourseCard(BuildContext context, Course course) {
     return Card(
       margin: const EdgeInsets.only(right: 16),
-      child: Container(
-        width: 280,
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                course.imageUrl,
-                height: 100,
-                width: double.infinity,
-                fit: BoxFit.cover,
+      child: InkWell(
+        onTap: () => Get.toNamed(
+          AppRoutes.courseDetails,
+          arguments: {'course': course},
+        ),
+        child: Container(
+          width: 280,
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  course.imageUrl,
+                  height: 100,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              course.title,
-              style: Theme.of(context).textTheme.titleMedium,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              course.instructor,
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-            const Spacer(),
-            LinearProgressIndicator(value: course.progress),
-            const SizedBox(height: 4),
-            Text(
-              '${(course.progress * 100).toInt()}% Complete',
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ],
+              const SizedBox(height: 8),
+              Text(
+                course.title,
+                style: Theme.of(context).textTheme.titleMedium,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                course.instructor,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const Spacer(),
+              LinearProgressIndicator(value: course.progress),
+              const SizedBox(height: 4),
+              Text(
+                '${(course.progress * 100).toInt()}% Complete',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -194,7 +200,10 @@ class HomePage extends StatelessWidget {
   Widget _buildCategoryCard(BuildContext context, Category category) {
     return Card(
       child: InkWell(
-        onTap: () {},
+        onTap: () => Get.toNamed(
+          AppRoutes.categoryListing,
+          arguments: {'category': category},
+        ),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(

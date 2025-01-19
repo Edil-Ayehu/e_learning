@@ -1,5 +1,6 @@
 import 'package:e_learning/model/study_group.dart';
 import 'package:e_learning/utils/app_routes.dart';
+import 'package:e_learning/view/category/category_listing_page.dart';
 import 'package:e_learning/view/course%20related%20pages/pages/course_certificate_page.dart';
 import 'package:e_learning/view/course%20related%20pages/pages/course_progress_page.dart';
 import 'package:e_learning/view/course%20related%20pages/pages/course_quiz_page.dart';
@@ -111,5 +112,11 @@ GetPage(
     group: Get.arguments['group'] as StudyGroup,
   ),
 ),
+ GetPage(
+    name: AppRoutes.categoryListing,
+    page: () => CategoryListingPage(
+      category: Get.arguments['category'] as Category,
+    ),
+  ),
   ];
 }

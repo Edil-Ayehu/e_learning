@@ -17,4 +17,5 @@ abstract class AppRoutes {
 static const studyGroup = '/study-group';
 static const groupDiscussion = '/group-discussion';
 static const projectDetails = '/project-details';
+static const categoryListing = '/category-listing';
 }
