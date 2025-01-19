@@ -4,6 +4,7 @@ class Course {
   final String imageUrl;
   final double progress;
   final String duration;
+  final String category;
 
   Course({
     required this.title,
@@ -11,6 +12,7 @@ class Course {
     required this.imageUrl,
     required this.progress,
     required this.duration,
+    required this.category,
   });
 }
 
@@ -33,6 +35,7 @@ final List<Course> featuredCourses = [
     imageUrl: 'https://picsum.photos/300/200',
     progress: 0.0,
     duration: '24h 30m',
+    category: 'Development',
   ),
   Course(
     title: 'UI/UX Design Fundamentals',
@@ -40,6 +43,7 @@ final List<Course> featuredCourses = [
     imageUrl: 'https://picsum.photos/300/201',
     progress: 0.0,
     duration: '12h 45m',
+    category: 'Design',
   ),
   // Add more courses as needed
 ];
@@ -59,6 +63,7 @@ final List<Course> ongoingCourses = [
     imageUrl: 'https://picsum.photos/300/202',
     progress: 0.6,
     duration: '18h 20m',
+    category: 'Development',
   ),
   Course(
     title: 'Mobile App Design Workshop',
@@ -66,6 +71,7 @@ final List<Course> ongoingCourses = [
     imageUrl: 'https://picsum.photos/300/203',
     progress: 0.3,
     duration: '15h 45m',
+    category: 'Design',
   ),
   // Add more ongoing courses as needed
 ];

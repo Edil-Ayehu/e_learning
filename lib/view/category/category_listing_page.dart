@@ -64,8 +64,30 @@ class CategoryListingPage extends StatelessWidget {
   Widget _buildCoursesList(BuildContext context) {
     // Filter courses based on category
     final categoryCourses = [...featuredCourses, ...ongoingCourses]
-        .where((course) => _courseMatchesCategory(course, category.name))
+        .where((course) => course.category == category.name)
         .toList();
+
+    if (categoryCourses.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.school_outlined,
+              size: 64,
+              color: Colors.grey,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'No courses available in this category',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Colors.grey,
+                  ),
+            ),
+          ],
+        ),
+      );
+    }
 
     return ListView.builder(
       shrinkWrap: true,
@@ -124,24 +146,5 @@ class CategoryListingPage extends StatelessWidget {
         );
       },
     );
-  }
-
-  bool _courseMatchesCategory(Course course, String categoryName) {
-    // This is a simple implementation. In a real app, you would have a proper
-    // category field in the Course model
-    switch (categoryName) {
-      case 'Development':
-        return course.title.toLowerCase().contains('flutter') ||
-            course.title.toLowerCase().contains('development');
-      case 'Design':
-        return course.title.toLowerCase().contains('design') ||
-            course.title.toLowerCase().contains('ui');
-      case 'Business':
-        return course.title.toLowerCase().contains('business');
-      case 'Marketing':
-        return course.title.toLowerCase().contains('marketing');
-      default:
-        return false;
-    }
   }
 }
