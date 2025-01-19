@@ -6,6 +6,7 @@ import 'package:e_learning/view/dashboard/analytics_dashboard_page.dart';
 import 'package:e_learning/view/dashboard/study_planner_page.dart';
 import 'package:e_learning/view/peer%20leanrning%20hub/peer_learning_hub_page.dart';
 import 'package:e_learning/view/profile/profile_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,38 +51,38 @@ class HomePage extends StatelessWidget {
                 Theme.of(context).colorScheme.primary.withOpacity(0.2),
             destinations: [
               NavigationDestination(
-                icon: Icon(Icons.home_outlined,
+                icon: Icon(CupertinoIcons.home,
                     color: selectedIndex.value == 0
                         ? Theme.of(context).colorScheme.primary
                         : null),
-                selectedIcon: Icon(Icons.home,
+                selectedIcon: Icon(CupertinoIcons.home,
                     color: Theme.of(context).colorScheme.primary),
                 label: 'Home',
               ),
               NavigationDestination(
-                icon: const Icon(Icons.calendar_today_outlined, color: null),
-                selectedIcon: Icon(Icons.calendar_today,
+                icon: const Icon(CupertinoIcons.calendar, color: null),
+                selectedIcon: Icon(CupertinoIcons.calendar,
                     color: Theme.of(context).colorScheme.primary),
                 label: 'Planner',
               ),
               NavigationDestination(
-                icon: const Icon(Icons.group_outlined, color: null),
-                selectedIcon: Icon(Icons.group,
+                icon: const Icon(CupertinoIcons.person_2, color: null),
+                selectedIcon: Icon(CupertinoIcons.person_2,
                     color: Theme.of(context).colorScheme.primary),
                 label: 'Peers',
               ),
               NavigationDestination(
-                icon: const Icon(Icons.analytics_outlined, color: null),
-                selectedIcon: Icon(Icons.analytics,
+                icon: const Icon(CupertinoIcons.chart_bar, color: null),
+                selectedIcon: Icon(CupertinoIcons.chart_bar,
                     color: Theme.of(context).colorScheme.primary),
                 label: 'Analytics',
               ),
               NavigationDestination(
-                icon: Icon(Icons.person_outline,
+                icon: Icon(CupertinoIcons.person,
                     color: selectedIndex.value == 4
                         ? Theme.of(context).colorScheme.primary
                         : null),
-                selectedIcon: Icon(Icons.person,
+                selectedIcon: Icon(CupertinoIcons.person,
                     color: Theme.of(context).colorScheme.primary),
                 label: 'Profile',
               ),
