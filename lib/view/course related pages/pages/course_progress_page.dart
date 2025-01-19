@@ -27,9 +27,13 @@ class CourseProgressPage extends StatelessWidget {
   }
 
   Widget _buildOverallProgress(BuildContext context) {
+    // Get screen width to calculate responsive sizes
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 360; // Breakpoint for small devices
+
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(isSmallScreen ? 12 : 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -38,40 +42,35 @@ class CourseProgressPage extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
+            // Use LayoutBuilder to make content responsive
+            LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth < 300) {
+                  // For very small screens, stack the content vertically
+                  return Column(
                     children: [
-                      const CircularProgressIndicator(
-                        value: 0.65,
-                        backgroundColor: Colors.grey,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          AppColors.primaryColor,
-                        ),
+                      _buildProgressCircle(context),
+                      const SizedBox(height: 16),
+                      _buildProgressStats(context),
+                    ],
+                  );
+                } else {
+                  // For larger screens, keep the row layout
+                  return Row(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: _buildProgressCircle(context),
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        '65% Complete',
-                        style: Theme.of(context).textTheme.titleMedium,
+                      SizedBox(width: isSmallScreen ? 12 : 24),
+                      Expanded(
+                        flex: 3,
+                        child: _buildProgressStats(context),
                       ),
                     ],
-                  ),
-                ),
-                const SizedBox(width: 24),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildProgressStat(context, 'Completed Lessons', '13/20'),
-                      const SizedBox(height: 8),
-                      _buildProgressStat(context, 'Time Spent', '8h 30m'),
-                      const SizedBox(height: 8),
-                      _buildProgressStat(context, 'Quiz Score', '85%'),
-                    ],
-                  ),
-                ),
-              ],
+                  );
+                }
+              },
             ),
           ],
         ),
@@ -79,11 +78,60 @@ class CourseProgressPage extends StatelessWidget {
     );
   }
 
+  // Extract progress circle to separate widget
+  Widget _buildProgressCircle(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final circleSize = screenWidth * 0.15; // Responsive circle size
+
+    return Column(
+      children: [
+        SizedBox(
+          height: circleSize,
+          width: circleSize,
+          child: const CircularProgressIndicator(
+            value: 0.65,
+            backgroundColor: Colors.grey,
+            valueColor: AlwaysStoppedAnimation<Color>(
+              AppColors.primaryColor,
+            ),
+            strokeWidth: 8,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          '65% Complete',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+      ],
+    );
+  }
+
+  // Extract progress stats to separate widget
+  Widget _buildProgressStats(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildProgressStat(context, 'Completed Lessons', '13/20'),
+        const SizedBox(height: 8),
+        _buildProgressStat(context, 'Time Spent', '8h 30m'),
+        const SizedBox(height: 8),
+        _buildProgressStat(context, 'Quiz Score', '85%'),
+      ],
+    );
+  }
+
+  // Update progress stat to handle overflow
   Widget _buildProgressStat(BuildContext context, String label, String value) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label),
+        Flexible(
+          child: Text(
+            label,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        const SizedBox(width: 8),
         Text(
           value,
           style: const TextStyle(
@@ -128,7 +176,8 @@ class CourseProgressPage extends StatelessWidget {
             LinearProgressIndicator(
               value: (index + 1) * 0.2,
               backgroundColor: Colors.grey[300],
-              valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
+              valueColor:
+                  const AlwaysStoppedAnimation<Color>(AppColors.primaryColor),
             ),
             const SizedBox(height: 4),
             Text('${((index + 1) * 20)}% Complete'),
