@@ -1,3 +1,4 @@
+import 'package:e_learning/main_screen.dart';
 import 'package:e_learning/model/study_group.dart';
 import 'package:e_learning/utils/app_routes.dart';
 import 'package:e_learning/view/category/category_listing_page.dart';
@@ -48,10 +49,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.profileSetup,
       page: () => ProfileSetupPage(),
-    ),
-    GetPage(
-      name: AppRoutes.home,
-      page: () => const HomePage(),
     ),
     GetPage(
       name: AppRoutes.courseDetails,
@@ -143,5 +140,13 @@ class AppPages {
     name: AppRoutes.helpSupport,
     page: () => const HelpSupportPage(),
   ),
+      GetPage(
+      name: AppRoutes.main,
+      page: () => const MainScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.homeContent,
+      page: () => const HomePage(),
+    ),
   ];
 }

@@ -23,4 +23,6 @@ static const profile = '/profile';
   static const notifications = '/notifications';
   static const settings = '/settings';
   static const helpSupport = '/help-support';
+    static const main = '/main';
+  static const homeContent = '/home-content';
 }

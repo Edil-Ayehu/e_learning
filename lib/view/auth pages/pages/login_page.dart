@@ -1,4 +1,5 @@
 import 'package:e_learning/common/widgets/custom_button.dart';
+import 'package:e_learning/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:e_learning/utils/app_colors.dart';
@@ -166,11 +167,11 @@ class LoginPage extends StatelessWidget {
   Widget _buildLoginButton() {
     return CustomButton(
       text: 'Login',
-      onPressed: () {
-        if (_formKey.currentState!.validate()) {
-          Get.offAllNamed('/home');
-        }
-      },
+    onPressed: () {
+      if (_formKey.currentState!.validate()) {
+        Get.offAllNamed(AppRoutes.main);
+      }
+    },
     );
   }
 
