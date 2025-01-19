@@ -8,7 +8,11 @@ import 'package:e_learning/view/dashboard/analytics_dashboard_page.dart';
 import 'package:e_learning/view/dashboard/study_planner_page.dart';
 import 'package:e_learning/view/peer%20leanrning%20hub/group_discussion_page.dart';
 import 'package:e_learning/view/peer%20leanrning%20hub/study_group_page.dart';
+import 'package:e_learning/view/profile/certificates_page.dart';
+import 'package:e_learning/view/profile/help_support_page.dart';
+import 'package:e_learning/view/profile/notifications_page.dart';
 import 'package:e_learning/view/profile/profile_page.dart';
+import 'package:e_learning/view/profile/settings_page.dart';
 import 'package:get/get.dart';
 import 'package:e_learning/view/splash page/splash_page.dart';
 import 'package:e_learning/view/auth pages/pages/login_page.dart';
@@ -123,5 +127,21 @@ class AppPages {
       name: AppRoutes.profile,
       page: () => const ProfilePage(),
     ),
+      GetPage(
+    name: AppRoutes.certificates,
+    page: () => const CertificatesPage(),
+  ),
+  GetPage(
+    name: AppRoutes.notifications,
+    page: () => const NotificationsPage(),
+  ),
+    GetPage(
+    name: AppRoutes.settings,
+    page: () => const SettingsPage(),
+  ),
+  GetPage(
+    name: AppRoutes.helpSupport,
+    page: () => const HelpSupportPage(),
+  ),
   ];
 }

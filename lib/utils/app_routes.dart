@@ -19,4 +19,8 @@ static const groupDiscussion = '/group-discussion';
 static const projectDetails = '/project-details';
 static const categoryListing = '/category-listing';
 static const profile = '/profile';
+  static const certificates = '/certificates';
+  static const notifications = '/notifications';
+  static const settings = '/settings';
+  static const helpSupport = '/help-support';
 }
