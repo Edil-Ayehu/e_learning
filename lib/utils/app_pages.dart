@@ -8,6 +8,7 @@ import 'package:e_learning/view/dashboard/analytics_dashboard_page.dart';
 import 'package:e_learning/view/dashboard/study_planner_page.dart';
 import 'package:e_learning/view/peer%20leanrning%20hub/group_discussion_page.dart';
 import 'package:e_learning/view/peer%20leanrning%20hub/study_group_page.dart';
+import 'package:e_learning/view/profile/profile_page.dart';
 import 'package:get/get.dart';
 import 'package:e_learning/view/splash page/splash_page.dart';
 import 'package:e_learning/view/auth pages/pages/login_page.dart';
@@ -96,27 +97,31 @@ class AppPages {
       page: () => StudyPlannerPage(),
     ),
     GetPage(
-  name: AppRoutes.peerLearning,
-  page: () => PeerLearningHub(),
-),
-GetPage(
-  name: AppRoutes.studyGroup,
-  page: () => StudyGroupPage(
-    group: Get.arguments['group'] as StudyGroup,
-  ),
-),
-GetPage(
-  name: AppRoutes.groupDiscussion,
-  page: () => GroupDiscussionPage(
-    discussion: Get.arguments['discussion'] as Discussion,
-    group: Get.arguments['group'] as StudyGroup,
-  ),
-),
- GetPage(
-    name: AppRoutes.categoryListing,
-    page: () => CategoryListingPage(
-      category: Get.arguments['category'] as Category,
+      name: AppRoutes.peerLearning,
+      page: () => PeerLearningHub(),
     ),
-  ),
+    GetPage(
+      name: AppRoutes.studyGroup,
+      page: () => StudyGroupPage(
+        group: Get.arguments['group'] as StudyGroup,
+      ),
+    ),
+    GetPage(
+      name: AppRoutes.groupDiscussion,
+      page: () => GroupDiscussionPage(
+        discussion: Get.arguments['discussion'] as Discussion,
+        group: Get.arguments['group'] as StudyGroup,
+      ),
+    ),
+    GetPage(
+      name: AppRoutes.categoryListing,
+      page: () => CategoryListingPage(
+        category: Get.arguments['category'] as Category,
+      ),
+    ),
+    GetPage(
+      name: AppRoutes.profile,
+      page: () => const ProfilePage(),
+    ),
   ];
 }

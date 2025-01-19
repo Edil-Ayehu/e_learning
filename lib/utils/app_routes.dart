@@ -18,4 +18,5 @@ static const studyGroup = '/study-group';
 static const groupDiscussion = '/group-discussion';
 static const projectDetails = '/project-details';
 static const categoryListing = '/category-listing';
+static const profile = '/profile';
 }

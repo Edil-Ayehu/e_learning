@@ -5,6 +5,7 @@ import 'package:e_learning/utils/app_routes.dart';
 import 'package:e_learning/view/dashboard/analytics_dashboard_page.dart';
 import 'package:e_learning/view/dashboard/study_planner_page.dart';
 import 'package:e_learning/view/peer%20leanrning%20hub/peer_learning_hub_page.dart';
+import 'package:e_learning/view/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,6 +39,7 @@ class HomePage extends StatelessWidget {
               AnalyticsDashboardPage(
                 analyticsData: _getAnalyticsData(),
               ),
+              const ProfilePage(),
             ],
           )),
       bottomNavigationBar: Obx(() => NavigationBar(
@@ -48,7 +50,10 @@ class HomePage extends StatelessWidget {
                 Theme.of(context).colorScheme.primary.withOpacity(0.2),
             destinations: [
               NavigationDestination(
-                icon: const Icon(Icons.home_outlined, color: null),
+                icon: Icon(Icons.home_outlined,
+                    color: selectedIndex.value == 0
+                        ? Theme.of(context).colorScheme.primary
+                        : null),
                 selectedIcon: Icon(Icons.home,
                     color: Theme.of(context).colorScheme.primary),
                 label: 'Home',
@@ -70,6 +75,15 @@ class HomePage extends StatelessWidget {
                 selectedIcon: Icon(Icons.analytics,
                     color: Theme.of(context).colorScheme.primary),
                 label: 'Analytics',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.person_outline,
+                    color: selectedIndex.value == 4
+                        ? Theme.of(context).colorScheme.primary
+                        : null),
+                selectedIcon: Icon(Icons.person,
+                    color: Theme.of(context).colorScheme.primary),
+                label: 'Profile',
               ),
             ],
           )),
