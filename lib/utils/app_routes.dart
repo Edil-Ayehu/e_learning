@@ -13,4 +13,8 @@ abstract class AppRoutes {
   static const courseCertificate = '/course-certificate';
   static const analytics = '/analytics';
   static const studyPlanner = '/study-planner';
+  static const peerLearning = '/peer-learning';
+static const studyGroup = '/study-group';
+static const groupDiscussion = '/group-discussion';
+static const projectDetails = '/project-details';
 }

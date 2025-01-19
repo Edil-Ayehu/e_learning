@@ -1,9 +1,12 @@
+import 'package:e_learning/model/study_group.dart';
 import 'package:e_learning/utils/app_routes.dart';
 import 'package:e_learning/view/course%20related%20pages/pages/course_certificate_page.dart';
 import 'package:e_learning/view/course%20related%20pages/pages/course_progress_page.dart';
 import 'package:e_learning/view/course%20related%20pages/pages/course_quiz_page.dart';
 import 'package:e_learning/view/dashboard/analytics_dashboard_page.dart';
 import 'package:e_learning/view/dashboard/study_planner_page.dart';
+import 'package:e_learning/view/peer%20leanrning%20hub/group_discussion_page.dart';
+import 'package:e_learning/view/peer%20leanrning%20hub/study_group_page.dart';
 import 'package:get/get.dart';
 import 'package:e_learning/view/splash page/splash_page.dart';
 import 'package:e_learning/view/auth pages/pages/login_page.dart';
@@ -15,6 +18,8 @@ import 'package:e_learning/view/course related pages/pages/course_details_page.d
 import 'package:e_learning/view/course related pages/pages/course_player_page.dart';
 import 'package:e_learning/view/course related pages/pages/course_discussion_page.dart';
 import 'package:e_learning/model/course.dart';
+
+import '../view/peer leanrning hub/peer_learning_hub_page.dart';
 
 class AppPages {
   static final routes = [
@@ -86,8 +91,25 @@ class AppPages {
       ),
     ),
     GetPage(
-  name: AppRoutes.studyPlanner,
-  page: () => StudyPlannerPage(),
+      name: AppRoutes.studyPlanner,
+      page: () => StudyPlannerPage(),
+    ),
+    GetPage(
+  name: AppRoutes.peerLearning,
+  page: () => PeerLearningHub(),
+),
+GetPage(
+  name: AppRoutes.studyGroup,
+  page: () => StudyGroupPage(
+    group: Get.arguments['group'] as StudyGroup,
+  ),
+),
+GetPage(
+  name: AppRoutes.groupDiscussion,
+  page: () => GroupDiscussionPage(
+    discussion: Get.arguments['discussion'] as Discussion,
+    group: Get.arguments['group'] as StudyGroup,
+  ),
 ),
   ];
 }

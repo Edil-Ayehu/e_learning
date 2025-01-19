@@ -16,6 +16,10 @@ class HomePage extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium),
         actions: [
           IconButton(
+            icon: const Icon(Icons.group),
+            onPressed: () => Get.toNamed(AppRoutes.peerLearning),
+          ),
+          IconButton(
             icon: const Icon(Icons.calendar_today),
             onPressed: () => Get.toNamed(AppRoutes.studyPlanner),
           ),
