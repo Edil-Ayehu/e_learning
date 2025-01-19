@@ -1,8 +1,10 @@
+import 'package:e_learning/model/course.dart';
 import 'package:flutter/material.dart';
 import 'package:e_learning/utils/app_colors.dart';
 
 class CourseDiscussionPage extends StatelessWidget {
-  const CourseDiscussionPage({super.key});
+  final Course? course;
+  const CourseDiscussionPage({super.key, this.course});
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,16 @@
+import 'package:e_learning/model/course.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:e_learning/utils/app_colors.dart';
 
 class CoursePlayerPage extends StatefulWidget {
-  const CoursePlayerPage({super.key});
+  final int lessonIndex;
+  final Course course;
+  const CoursePlayerPage({
+    super.key,
+    required this.lessonIndex,
+    required this.course,
+  });
 
   @override
   State<CoursePlayerPage> createState() => _CoursePlayerPageState();

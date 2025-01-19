@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:e_learning/utils/app_colors.dart';
 import 'package:e_learning/model/course.dart';
+import 'package:e_learning/utils/app_routes.dart';
 
 class CourseDetailsPage extends StatelessWidget {
   final Course course;
@@ -62,11 +63,11 @@ class CourseDetailsPage extends StatelessWidget {
         const SizedBox(height: 8),
         Row(
           children: [
-            Icon(Icons.person_outline, color: AppColors.textSecondaryColor),
+            const Icon(Icons.person_outline, color: AppColors.textSecondaryColor),
             const SizedBox(width: 8),
             Text(course.instructor),
             const Spacer(),
-            Icon(Icons.timer_outlined, color: AppColors.textSecondaryColor),
+            const Icon(Icons.timer_outlined, color: AppColors.textSecondaryColor),
             const SizedBox(width: 8),
             Text(course.duration),
           ],
@@ -75,20 +76,32 @@ class CourseDetailsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              icon: Icon(Icons.forum_outlined),
-              onPressed: () => Get.toNamed('/course-discussion'),
+              icon: const Icon(Icons.forum_outlined),
+              onPressed: () => Get.toNamed(
+                AppRoutes.courseDiscussion,
+                arguments: {'course': course},
+              ),
             ),
             IconButton(
-              icon: Icon(Icons.quiz_outlined),
-              onPressed: () => Get.toNamed('/course-quiz'),
+              icon: const Icon(Icons.quiz_outlined),
+              onPressed: () => Get.toNamed(
+                AppRoutes.courseQuiz,
+                arguments: {'course': course},
+              ),
             ),
             IconButton(
-              icon: Icon(Icons.bar_chart),
-              onPressed: () => Get.toNamed('/course-progress'),
+              icon: const Icon(Icons.bar_chart),
+              onPressed: () => Get.toNamed(
+                AppRoutes.courseProgress,
+                arguments: {'course': course},
+              ),
             ),
             IconButton(
-              icon: Icon(Icons.workspace_premium_outlined),
-              onPressed: () => Get.toNamed('/course-certificate'),
+              icon: const Icon(Icons.workspace_premium_outlined),
+              onPressed: () => Get.toNamed(
+                AppRoutes.courseCertificate,
+                arguments: {'course': course},
+              ),
             ),
           ],
         ),
@@ -102,7 +115,7 @@ class CourseDetailsPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 30,
               backgroundImage: NetworkImage('instructor_image_url'),
             ),
@@ -155,12 +168,18 @@ class CourseDetailsPage extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
       child: ListTile(
-        leading: Icon(Icons.play_circle_outline, color: AppColors.primaryColor),
+        leading: const Icon(Icons.play_circle_outline, color: AppColors.primaryColor),
         title: Text('Lesson ${index + 1}'),
-        subtitle: Text('Duration: 15 mins'),
-        trailing: Icon(Icons.lock_outline, color: AppColors.textSecondaryColor),
+        subtitle: const Text('Duration: 15 mins'),
+        trailing: const Icon(Icons.lock_outline, color: AppColors.textSecondaryColor),
         onTap: () {
-          Get.toNamed('/course-player', arguments: {'lessonIndex': index});
+          Get.toNamed(
+            AppRoutes.coursePlayer, 
+            arguments: {
+              'lessonIndex': index,
+              'course': course, // Pass the course data to player
+            },
+          );
         },
       ),
     );
@@ -182,6 +201,10 @@ class CourseDetailsPage extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           // Handle enrollment
+          Get.toNamed(
+            AppRoutes.courseProgress,
+            arguments: {'course': course},
+          );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primaryColor,
