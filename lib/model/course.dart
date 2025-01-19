@@ -19,13 +19,20 @@ class Course {
 class Category {
   final String name;
   final String icon;
-  final int courseCount;
+  late final int courseCount;
 
   Category({
     required this.name,
     required this.icon,
-    required this.courseCount,
-  });
+  }) {
+    courseCount = _calculateCourseCount();
+  }
+
+  int _calculateCourseCount() {
+    return [...featuredCourses, ...ongoingCourses]
+        .where((course) => course.category == name)
+        .length;
+  }
 }
 
 final List<Course> featuredCourses = [
@@ -49,11 +56,10 @@ final List<Course> featuredCourses = [
 ];
 
 final List<Category> categories = [
-  Category(name: 'Development', icon: '💻', courseCount: 42),
-  Category(name: 'Design', icon: '🎨', courseCount: 30),
-  Category(name: 'Business', icon: '📊', courseCount: 25),
-  Category(name: 'Marketing', icon: '📱', courseCount: 20),
-  // Add more categories as needed
+  Category(name: 'Development', icon: '💻'),
+  Category(name: 'Design', icon: '🎨'),
+  Category(name: 'Business', icon: '📊'),
+  Category(name: 'Marketing', icon: '📱'),
 ];
 
 final List<Course> ongoingCourses = [
@@ -72,6 +78,22 @@ final List<Course> ongoingCourses = [
     progress: 0.3,
     duration: '15h 45m',
     category: 'Design',
+  ),
+  Course(
+    title: 'Digital Marketing Masterclass',
+    instructor: 'Sarah Wilson',
+    imageUrl: 'https://picsum.photos/300/203',
+    progress: 0.3,
+    duration: '15h 45m',
+    category: 'Marketing',
+  ),
+  Course(
+    title: 'Business Strategy Workshop',
+    instructor: 'Sarah Wilson',
+    imageUrl: 'https://picsum.photos/300/203',
+    progress: 0.3,
+    duration: '15h 45m',
+    category: 'Business',
   ),
   // Add more ongoing courses as needed
 ];

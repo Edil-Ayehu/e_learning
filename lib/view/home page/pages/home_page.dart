@@ -2,6 +2,9 @@ import 'package:e_learning/controllers/theme_controller.dart';
 import 'package:e_learning/model/analytics_data.dart';
 import 'package:e_learning/model/course.dart';
 import 'package:e_learning/utils/app_routes.dart';
+import 'package:e_learning/view/dashboard/analytics_dashboard_page.dart';
+import 'package:e_learning/view/dashboard/study_planner_page.dart';
+import 'package:e_learning/view/peer%20leanrning%20hub/peer_learning_hub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,23 +13,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final RxInt selectedIndex = 0.obs;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('E-Learning',
             style: Theme.of(context).textTheme.headlineMedium),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.group),
-            onPressed: () => Get.toNamed(AppRoutes.peerLearning),
-          ),
-          IconButton(
-            icon: const Icon(Icons.calendar_today),
-            onPressed: () => Get.toNamed(AppRoutes.studyPlanner),
-          ),
-          IconButton(
-            icon: const Icon(Icons.analytics),
-            onPressed: () => _navigateToAnalytics(),
-          ),
           GetBuilder<ThemeController>(
             builder: (controller) => IconButton(
               icon: Icon(
@@ -36,20 +29,67 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildWelcomeSection(context),
-            const SizedBox(height: 24),
-            _buildOngoingCoursesSection(context),
-            const SizedBox(height: 24),
-            _buildCategoriesSection(context),
-            const SizedBox(height: 24),
-            _buildFeaturedCoursesSection(context),
-          ],
-        ),
+      body: Obx(() => IndexedStack(
+            index: selectedIndex.value,
+            children: [
+              _buildHomeContent(context),
+              StudyPlannerPage(),
+              PeerLearningHub(),
+              AnalyticsDashboardPage(
+                analyticsData: _getAnalyticsData(),
+              ),
+            ],
+          )),
+      bottomNavigationBar: Obx(() => NavigationBar(
+            selectedIndex: selectedIndex.value,
+            onDestinationSelected: (index) => selectedIndex.value = index,
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            indicatorColor:
+                Theme.of(context).colorScheme.primary.withOpacity(0.2),
+            destinations: [
+              NavigationDestination(
+                icon: const Icon(Icons.home_outlined, color: null),
+                selectedIcon: Icon(Icons.home,
+                    color: Theme.of(context).colorScheme.primary),
+                label: 'Home',
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.calendar_today_outlined, color: null),
+                selectedIcon: Icon(Icons.calendar_today,
+                    color: Theme.of(context).colorScheme.primary),
+                label: 'Planner',
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.group_outlined, color: null),
+                selectedIcon: Icon(Icons.group,
+                    color: Theme.of(context).colorScheme.primary),
+                label: 'Peers',
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.analytics_outlined, color: null),
+                selectedIcon: Icon(Icons.analytics,
+                    color: Theme.of(context).colorScheme.primary),
+                label: 'Analytics',
+              ),
+            ],
+          )),
+    );
+  }
+
+  Widget _buildHomeContent(BuildContext context) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildWelcomeSection(context),
+          const SizedBox(height: 24),
+          _buildOngoingCoursesSection(context),
+          const SizedBox(height: 24),
+          _buildCategoriesSection(context),
+          const SizedBox(height: 24),
+          _buildFeaturedCoursesSection(context),
+        ],
       ),
     );
   }
@@ -278,11 +318,10 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  void _navigateToAnalytics() {
-    // Create sample analytics data (replace with real data from your backend)
-    final analyticsData = AnalyticsData(
+  AnalyticsData _getAnalyticsData() {
+    return AnalyticsData(
       overallProgress: 0.65,
-      totalTimeSpent: 480, // 8 hours
+      totalTimeSpent: 480,
       timePerCourse: {
         'Flutter Development': 180,
         'Dart Basics': 120,
@@ -316,11 +355,6 @@ class HomePage extends StatelessWidget {
           lessonsCompleted: 2 + index,
         ),
       ),
-    );
-
-    Get.toNamed(
-      AppRoutes.analytics,
-      arguments: {'analyticsData': analyticsData},
     );
   }
 }
