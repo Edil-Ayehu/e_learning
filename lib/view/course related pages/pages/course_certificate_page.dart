@@ -108,10 +108,17 @@ class CourseCertificatePage extends StatelessWidget {
           onPressed: () {
             // Handle download
           },
-          icon: const Icon(Icons.download),
-          label: const Text('Download'),
+          icon: const Icon(
+            Icons.download,
+            color: Colors.white,
+          ),
+          label: const Text(
+            'Download',
+            style: TextStyle(color: Colors.white),
+          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
+            foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(
               horizontal: 24,
               vertical: 12,
@@ -122,10 +129,17 @@ class CourseCertificatePage extends StatelessWidget {
           onPressed: () {
             // Handle share
           },
-          icon: const Icon(Icons.share),
-          label: const Text('Share'),
+          icon: const Icon(
+            Icons.share,
+            color: Colors.white,
+          ),
+          label: const Text(
+            'Share',
+            style: TextStyle(color: Colors.white),
+          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryColor,
+            foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(
               horizontal: 24,
               vertical: 12,

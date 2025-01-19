@@ -6,7 +6,6 @@ import 'package:e_learning/utils/app_routes.dart';
 
 class CourseDetailsPage extends StatelessWidget {
   final Course course;
-  
 
   const CourseDetailsPage({super.key, required this.course});
 
@@ -63,11 +62,13 @@ class CourseDetailsPage extends StatelessWidget {
         const SizedBox(height: 8),
         Row(
           children: [
-            const Icon(Icons.person_outline, color: AppColors.textSecondaryColor),
+            const Icon(Icons.person_outline,
+                color: AppColors.textSecondaryColor),
             const SizedBox(width: 8),
             Text(course.instructor),
             const Spacer(),
-            const Icon(Icons.timer_outlined, color: AppColors.textSecondaryColor),
+            const Icon(Icons.timer_outlined,
+                color: AppColors.textSecondaryColor),
             const SizedBox(width: 8),
             Text(course.duration),
           ],
@@ -76,28 +77,40 @@ class CourseDetailsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              icon: const Icon(Icons.forum_outlined),
+              icon: Icon(
+                Icons.forum_outlined,
+                color: Theme.of(context).iconTheme.color,
+              ),
               onPressed: () => Get.toNamed(
                 AppRoutes.courseDiscussion,
                 arguments: {'course': course},
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.quiz_outlined),
+              icon: Icon(
+                Icons.quiz_outlined,
+                color: Theme.of(context).iconTheme.color,
+              ),
               onPressed: () => Get.toNamed(
                 AppRoutes.courseQuiz,
                 arguments: {'course': course},
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.bar_chart),
+              icon: Icon(
+                Icons.bar_chart,
+                color: Theme.of(context).iconTheme.color,
+              ),
               onPressed: () => Get.toNamed(
                 AppRoutes.courseProgress,
                 arguments: {'course': course},
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.workspace_premium_outlined),
+              icon: Icon(
+                Icons.workspace_premium_outlined,
+                color: Theme.of(context).iconTheme.color,
+              ),
               onPressed: () => Get.toNamed(
                 AppRoutes.courseCertificate,
                 arguments: {'course': course},
@@ -168,13 +181,15 @@ class CourseDetailsPage extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
       child: ListTile(
-        leading: const Icon(Icons.play_circle_outline, color: AppColors.primaryColor),
+        leading: const Icon(Icons.play_circle_outline,
+            color: AppColors.primaryColor),
         title: Text('Lesson ${index + 1}'),
         subtitle: const Text('Duration: 15 mins'),
-        trailing: const Icon(Icons.lock_outline, color: AppColors.textSecondaryColor),
+        trailing:
+            const Icon(Icons.lock_outline, color: AppColors.textSecondaryColor),
         onTap: () {
           Get.toNamed(
-            AppRoutes.coursePlayer, 
+            AppRoutes.coursePlayer,
             arguments: {
               'lessonIndex': index,
               'course': course, // Pass the course data to player
@@ -200,7 +215,6 @@ class CourseDetailsPage extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: () {
-          // Handle enrollment
           Get.toNamed(
             AppRoutes.courseProgress,
             arguments: {'course': course},
@@ -208,9 +222,16 @@ class CourseDetailsPage extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(vertical: 16),
         ),
-        child: const Text('Enroll Now'),
+        child: const Text(
+          'Enroll Now',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
