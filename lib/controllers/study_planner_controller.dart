@@ -9,7 +9,8 @@ class StudyPlannerController extends GetxController {
   DateTime selectedDay = DateTime.now();
   final Map<DateTime, List<StudyPlan>> events = {};
   List<StudyPlan> selectedEvents = [];
-  final FlutterLocalNotificationsPlugin notificationsPlugin = FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   @override
   void onInit() {
@@ -20,9 +21,11 @@ class StudyPlannerController extends GetxController {
   }
 
   Future<void> initializeNotifications() async {
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
     const iosSettings = DarwinInitializationSettings();
-    const initSettings = InitializationSettings(android: androidSettings, iOS: iosSettings);
+    const initSettings =
+        InitializationSettings(android: androidSettings, iOS: iosSettings);
     await notificationsPlugin.initialize(initSettings);
   }
 
@@ -40,7 +43,7 @@ class StudyPlannerController extends GetxController {
       type: PlanType.studySession,
       hasReminder: true,
     );
-    
+
     await addStudyPlan(samplePlan);
   }
 
@@ -56,14 +59,15 @@ class StudyPlannerController extends GetxController {
   }
 
   Future<void> addStudyPlan(StudyPlan plan) async {
-    final day = DateTime(plan.startTime.year, plan.startTime.month, plan.startTime.day);
+    final day =
+        DateTime(plan.startTime.year, plan.startTime.month, plan.startTime.day);
     if (events[day] == null) events[day] = [];
     events[day]!.add(plan);
-    
+
     if (plan.hasReminder) {
       scheduleNotification(plan);
     }
-    
+
     update();
   }
 
@@ -71,28 +75,31 @@ class StudyPlannerController extends GetxController {
     const androidDetails = AndroidNotificationDetails(
       'study_reminders',
       'Study Reminders',
+      channelDescription: 'Notifications for study plan reminders',
       importance: Importance.high,
     );
     const iosDetails = DarwinNotificationDetails();
-    const details = NotificationDetails(android: androidDetails, iOS: iosDetails);
+    const details =
+        NotificationDetails(android: androidDetails, iOS: iosDetails);
 
     final scheduledDate = tz.TZDateTime.from(
       plan.startTime.subtract(const Duration(minutes: 15)),
       tz.local,
     );
-    
+
     await notificationsPlugin.zonedSchedule(
       plan.hashCode,
       'Study Reminder',
       'Time to study: ${plan.title}',
       scheduledDate,
       details,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
     );
   }
 
-    void togglePlanCompletion(String planId) {
+  void togglePlanCompletion(String planId) {
     for (var dayEvents in events.values) {
       for (var plan in dayEvents) {
         if (plan.id == planId) {
@@ -109,14 +116,14 @@ class StudyPlannerController extends GetxController {
             hasReminder: plan.hasReminder,
             isCompleted: !plan.isCompleted,
           );
-          
+
           // Replace the old plan with the updated one
           dayEvents[dayEvents.indexOf(plan)] = updatedPlan;
           break;
         }
       }
     }
-    
+
     // Update the selected events list
     selectedEvents = getEventsForDay(selectedDay);
     update();
