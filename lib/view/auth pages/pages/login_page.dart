@@ -1,5 +1,5 @@
 import 'package:e_learning/common/widgets/custom_button.dart';
-import 'package:e_learning/utils/app_routes.dart';
+import 'package:e_learning/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:e_learning/utils/app_colors.dart';
@@ -7,6 +7,7 @@ import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final LoginController _loginController = Get.put(LoginController());
 
   LoginPage({super.key});
 
@@ -165,14 +166,15 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _buildLoginButton() {
-    return CustomButton(
-      text: 'Login',
-    onPressed: () {
-      if (_formKey.currentState!.validate()) {
-        Get.offAllNamed(AppRoutes.main);
-      }
-    },
-    );
+    return Obx(() => CustomButton(
+          text: 'Login',
+          isLoading: _loginController.isLoading.value,
+          onPressed: () {
+            if (_formKey.currentState!.validate()) {
+              _loginController.login();
+            }
+          },
+        ));
   }
 
   Widget _buildDivider() {

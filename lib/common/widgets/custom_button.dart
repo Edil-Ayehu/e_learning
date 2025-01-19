@@ -7,6 +7,7 @@ class CustomButton extends StatelessWidget {
   final double? width;
   final double height;
   final bool isLoading;
+  
 
   const CustomButton({
     super.key,
@@ -36,6 +37,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 16),
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(
@@ -49,8 +51,8 @@ class CustomButton extends StatelessWidget {
                 height: 20,
                 width: 20,
                 child: CircularProgressIndicator(
-                  color: Colors.white,
                   strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                 ),
               )
             : Text(
