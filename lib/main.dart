@@ -5,8 +5,11 @@ import 'package:e_learning/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
   await GetStorage.init();
   final themeController = Get.put(ThemeController());
   runApp(MyApp(themeController: themeController));

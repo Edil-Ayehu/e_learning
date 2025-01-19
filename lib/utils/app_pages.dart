@@ -3,6 +3,7 @@ import 'package:e_learning/view/course%20related%20pages/pages/course_certificat
 import 'package:e_learning/view/course%20related%20pages/pages/course_progress_page.dart';
 import 'package:e_learning/view/course%20related%20pages/pages/course_quiz_page.dart';
 import 'package:e_learning/view/dashboard/analytics_dashboard_page.dart';
+import 'package:e_learning/view/dashboard/study_planner_page.dart';
 import 'package:get/get.dart';
 import 'package:e_learning/view/splash page/splash_page.dart';
 import 'package:e_learning/view/auth pages/pages/login_page.dart';
@@ -84,5 +85,9 @@ class AppPages {
         analyticsData: Get.arguments['analyticsData'],
       ),
     ),
+    GetPage(
+  name: AppRoutes.studyPlanner,
+  page: () => StudyPlannerPage(),
+),
   ];
 }
